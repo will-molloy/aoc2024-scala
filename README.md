@@ -1,3 +1,5 @@
-# base-template
+# aoc2024-scala
 
-[![build](https://github.com/will-molloy/base-template/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/will-molloy/base-template/actions/workflows/build.yml)
+https://adventofcode.com/2024
+
+### Go repo: https://github.com/will-molloy/aoc2024-go

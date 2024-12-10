@@ -1,1 +1,7 @@
 .idea
+.bsp
+
+target
+
+# don't commit input files
+real_input
