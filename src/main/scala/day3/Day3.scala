@@ -1,15 +1,13 @@
 package aoc2024
 package day3
 
-import scala.util.matching.Regex
-
 /**
  * https://adventofcode.com/2024/day/3
  */
 object Day3 {
 
   def part1(line: String): Int = {
-    val p: Regex = """mul\((\d+),(\d+)\)""".r
+    val p = """mul\((\d+),(\d+)\)""".r
     val matches = p.findAllMatchIn(line)
 
     matches.map(m => {
@@ -19,7 +17,7 @@ object Day3 {
   }
 
   def part2(line: String): Int = {
-    val p: Regex = """(?:do\(\)|^)(.*?)(?:don't\(\)|$)""".r
+    val p = """(?:do\(\)|^)(.*?)(?:don't\(\)|$)""".r
     val matches = p.findAllMatchIn(line)
 
     matches.map(m => {
