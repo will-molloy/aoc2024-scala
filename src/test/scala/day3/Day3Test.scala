@@ -10,7 +10,6 @@ class Day3Test extends AnyFunSuiteLike {
 
   test("part1") {
     val input = readInput((if test then "test_input" else "real_input") + "/day3_input.txt")
-
     assert(Day3.part1(input) === 161)
   }
 
