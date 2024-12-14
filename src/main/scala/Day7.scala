@@ -1,5 +1,8 @@
 package aoc2024
 
+/**
+ * https://adventofcode.com/2024/day/7
+ */
 object Day7 {
 
   def part1(lines: Seq[String]): Long = {
@@ -13,13 +16,11 @@ object Day7 {
   private def result(line: String, ops: Seq[Char]): Long = {
     val colon = line.indexOf(':')
     val target = line.take(colon).toLong
-    val nums = line.drop(colon + 1).split(' ').filterNot(_.isBlank).map(_.toLong)
+    val nums = line.drop(colon + 1).split(' ').filterNot(_.isEmpty).map(_.toLong)
 
     def dfs(i: Int, op: Char, result: Long): Boolean = {
-      if (result == target) {
-        true
-      } else if (i == nums.length) {
-        false
+      if (i == nums.length) {
+        result == target
       } else {
         op match
           case '+' => ops.exists(op => dfs(i + 1, op, result + nums(i)))
@@ -28,10 +29,7 @@ object Day7 {
       }
     }
 
-    if (ops.exists(op => dfs(1, op, nums.head))) {
-      target
-    } else {
-      0
-    }
+    if (ops.exists(op => dfs(1, op, nums.head))) target
+    else 0
   }
 }
