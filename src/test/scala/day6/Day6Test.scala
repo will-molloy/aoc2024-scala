@@ -3,7 +3,6 @@ package day6
 
 import org.scalatest.funsuite.AnyFunSuiteLike
 
-import scala.collection.mutable
 import scala.io.Source
 
 class Day6Test extends AnyFunSuiteLike {
@@ -14,9 +13,13 @@ class Day6Test extends AnyFunSuiteLike {
     assert(Day6.part1(input) === 41)
   }
 
-  private def readInput(fileName: String): mutable.Seq[mutable.Seq[Char]] = {
+  test("part2") {
+    val input = readInput((if test then "test_input" else "real_input") + "/day6_input.txt")
+    assert(Day6.part2(input) === 6)
+  }
+
+  private def readInput(fileName: String): Seq[Seq[Char]] = {
     val input = Source.fromResource(fileName)
-    val grid = input.getLines().toSeq.map(_.toCharArray)
-    mutable.Seq.from(grid.map(mutable.Seq.from(_)))
+    input.getLines().toSeq.map(_.toCharArray)
   }
 }
