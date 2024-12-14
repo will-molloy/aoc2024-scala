@@ -10,12 +10,12 @@ class Day1Test extends AnyFunSuite {
 
   test("part1") {
     val input = readInput((if test then "test_input" else "real_input") + "/day1_input.txt")
-    assert(Day1.part1(input._1, input._2) === 11)
+    assert(Day1.part1.tupled(input) === 11)
   }
 
   test("part2") {
     val input = readInput((if test then "test_input" else "real_input") + "/day1_input.txt")
-    assert(Day1.part2(input._1, input._2) === 31)
+    assert(Day1.part2.tupled(input) === 31)
   }
 
   private def readInput(fileName: String): (Seq[Int], Seq[Int]) = {
