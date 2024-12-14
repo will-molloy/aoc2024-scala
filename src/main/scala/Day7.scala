@@ -18,18 +18,20 @@ object Day7 {
     val target = line.take(colon).toLong
     val nums = line.drop(colon + 1).split(' ').filterNot(_.isEmpty).map(_.toLong)
 
-    def dfs(i: Int, op: Char, result: Long): Boolean = {
+    def dfs(i: Int, current: Long): Boolean = {
       if (i == nums.length) {
-        result == target
+        current == target
       } else {
-        op match
-          case '+' => ops.exists(op => dfs(i + 1, op, result + nums(i)))
-          case '*' => ops.exists(op => dfs(i + 1, op, result * nums(i)))
-          case '|' => ops.exists(op => dfs(i + 1, op, (result.toString + nums(i).toString).toLong))
+        ops.exists(op => {
+          val next = op match
+            case '+' => current + nums(i)
+            case '*' => current * nums(i)
+            case '|' => (current.toString + nums(i).toString).toLong
+          dfs(i + 1, next)
+        })
       }
     }
 
-    if (ops.exists(op => dfs(1, op, nums.head))) target
-    else 0
+    if (dfs(1, nums.head)) target else 0
   }
 }
