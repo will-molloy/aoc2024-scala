@@ -18,7 +18,7 @@ class Day3Test extends AnyFunSuiteLike {
     assert(Day3.part2(input) === 48)
   }
 
-  def readInput(fileName: String): String = {
+  private def readInput(fileName: String): String = {
     val input = Source.fromResource(fileName)
     // join string WITHOUT newlines...!
     input.getLines().mkString("")

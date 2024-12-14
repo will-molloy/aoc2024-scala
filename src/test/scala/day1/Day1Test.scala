@@ -18,7 +18,7 @@ class Day1Test extends AnyFunSuite {
     assert(Day1.part2(input._1, input._2) === 31)
   }
 
-  def readInput(fileName: String): (Seq[Int], Seq[Int]) = {
+  private def readInput(fileName: String): (Seq[Int], Seq[Int]) = {
     val input = Source.fromResource(fileName)
     input.getLines()
       .map(_.split("\\s+").map(_.toInt))

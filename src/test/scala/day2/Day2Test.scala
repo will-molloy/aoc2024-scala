@@ -17,7 +17,7 @@ class Day2Test extends AnyFunSuiteLike {
     assert(Day2.part2(input) === 4)
   }
 
-  def readInput(fileName: String): Seq[Seq[Int]] = {
+  private def readInput(fileName: String): Seq[Seq[Int]] = {
     val input = Source.fromResource(fileName)
     input.getLines().toSeq.map(_.split("\\s+").map(_.toInt))
   }

@@ -11,7 +11,6 @@ object Day3 {
     val matches = p.findAllMatchIn(line)
 
     matches.map(m => {
-      println(m.matched)
       m.group(1).toInt * m.group(2).toInt
     }).sum
   }
@@ -21,7 +20,6 @@ object Day3 {
     val matches = p.findAllMatchIn(line)
 
     matches.map(m => {
-      println(m.matched)
       part1(m.group(1))
     }).sum
   }

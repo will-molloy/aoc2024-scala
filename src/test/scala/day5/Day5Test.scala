@@ -1,0 +1,34 @@
+package aoc2024
+package day5
+
+import org.scalatest.funsuite.AnyFunSuiteLike
+
+import scala.io.Source
+
+class Day5Test extends AnyFunSuiteLike {
+  private val test = true
+
+  test("part1") {
+    val input = readInput((if test then "test_input" else "real_input") + "/day5_input.txt")
+    assert(Day5.part1(input._1, input._2) === 143)
+  }
+
+  test("part2") {
+    val input = readInput((if test then "test_input" else "real_input") + "/day5_input.txt")
+    assert(Day5.part2(input._1, input._2) === 123)
+  }
+
+  private def readInput(fileName: String): (Set[(Int, Int)], Seq[Seq[Int]]) = {
+    val input = Source.fromResource(fileName)
+    val lines = input.getLines().toSeq
+
+    val rules = lines.takeWhile(s => s.contains('|'))
+      .map(_.split('|').map(_.toInt)).map(a => (a(0), a(1)))
+      .toSet
+
+    val updates = lines.dropWhile(s => s.contains('|')).drop(1)
+      .map(_.split(',').map(_.toInt).toSeq)
+
+    (rules, updates)
+  }
+}
