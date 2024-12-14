@@ -1,5 +1,4 @@
 package aoc2024
-package day5
 
 import scala.annotation.tailrec
 

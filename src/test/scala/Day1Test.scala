@@ -1,20 +1,19 @@
 package aoc2024
-package day1
 
 import org.scalatest.funsuite.AnyFunSuite
 
 import scala.io.Source
 
 class Day1Test extends AnyFunSuite {
-  private val test = true
+  private val example = true
 
   test("part1") {
-    val input = readInput((if test then "test_input" else "real_input") + "/day1_input.txt")
+    val input = readInput((if example then "example_input" else "real_input") + "/day1_input.txt")
     assert(Day1.part1.tupled(input) === 11)
   }
 
   test("part2") {
-    val input = readInput((if test then "test_input" else "real_input") + "/day1_input.txt")
+    val input = readInput((if example then "example_input" else "real_input") + "/day1_input.txt")
     assert(Day1.part2.tupled(input) === 31)
   }
 

@@ -1,5 +1,4 @@
 package aoc2024
-package day3
 
 /**
  * https://adventofcode.com/2024/day/3

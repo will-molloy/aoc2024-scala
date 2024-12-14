@@ -1,9 +1,8 @@
 package aoc2024
-package day6
 
 import scala.annotation.tailrec
 import scala.collection.mutable
-import scala.collection.parallel.CollectionConverters._
+import scala.collection.parallel.CollectionConverters.*
 
 /**
  * https://adventofcode.com/2024/day/6
