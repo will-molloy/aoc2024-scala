@@ -1,15 +1,17 @@
 package aoc2024
 
+import common.Day
+
 /**
  * https://adventofcode.com/2024/day/7
  */
-object Day7 {
+object Day7 extends Day[Seq[String], Long](2024, 7) {
 
-  def part1(lines: Seq[String]): Long = {
+  override def part1(lines: Seq[String]): Long = {
     lines.map(result(_, Seq('+', '*'))).sum
   }
 
-  def part2(lines: Seq[String]): Long = {
+  override def part2(lines: Seq[String]): Long = {
     lines.map(result(_, Seq('+', '*', '|'))).sum
   }
 

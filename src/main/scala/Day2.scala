@@ -1,17 +1,19 @@
 package aoc2024
 
+import aoc2024.common.Day
+
 import scala.annotation.tailrec
 
 /**
  * https://adventofcode.com/2024/day/2
  */
-object Day2 {
+object Day2 extends Day[Seq[Seq[Int]], Int](2024, 2) {
 
-  def part1(reports: Seq[Seq[Int]]): Int = {
+  override def part1(reports: Seq[Seq[Int]]): Int = {
     reports.count(isSafe)
   }
 
-  def part2(reports: Seq[Seq[Int]]): Int = {
+  override def part2(reports: Seq[Seq[Int]]): Int = {
     // try all combinations
     reports.count(report => report.indices.exists(i => {
       val newReport = report.take(i) ++ report.drop(i + 1)

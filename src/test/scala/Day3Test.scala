@@ -1,25 +1,14 @@
 package aoc2024
 
-import org.scalatest.funsuite.AnyFunSuiteLike
+import common.{DayTest, Inputs}
 
 import scala.io.Source
 
-class Day3Test extends AnyFunSuiteLike {
-  private val example = true
+class Day3Test extends DayTest(Day3) {
+  // join string WITHOUT newlines...!
+  override def convertInput: Source => String = Inputs.lines.andThen(_.mkString(""))
 
-  test("part1") {
-    val input = readInput((if example then "example_input" else "real_input") + "/day3_input.txt")
-    assert(Day3.part1(input) === 161)
-  }
+  override def part1Expected = Expected(161, 196826776)
 
-  test("part2") {
-    val input = readInput(if example then "example_input/day3_part2_input.txt" else "real_input/day3_input.txt")
-    assert(Day3.part2(input) === 48)
-  }
-
-  private def readInput(fileName: String): String = {
-    val input = Source.fromResource(fileName)
-    // join string WITHOUT newlines...!
-    input.getLines().mkString("")
-  }
+  override def part2Expected = Expected(48, 106780429)
 }

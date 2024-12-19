@@ -1,27 +1,31 @@
 package aoc2024
 
+import aoc2024.common.Day
+
 import scala.annotation.tailrec
 
 /**
  * https://adventofcode.com/2024/day/5
  */
-object Day5 {
+object Day5 extends Day[(Set[(Int, Int)], Seq[Seq[Int]]), Int](2024, 5) {
 
-  def part1(rules: Set[(Int, Int)], updates: Seq[Seq[Int]]): Int = {
-    updates.filter(good.curried(rules)).map(update => {
-      update(update.length / 2)
-    }).sum
-  }
+  override def part1(input: (Set[(Int, Int)], Seq[Seq[Int]])): Int = input match
+    case (rules, updates) => {
+      updates.filter(good.curried(rules)).map(update => {
+        update(update.length / 2)
+      }).sum
+    }
 
   private def good(rules: Set[(Int, Int)], update: Seq[Int]): Boolean = {
     update.indices.forall(i => update.indices.drop(i + 1).forall(j => !rules.contains((update(j), update(i)))))
   }
 
-  def part2(rules: Set[(Int, Int)], updates: Seq[Seq[Int]]): Int = {
-    updates.filterNot(good.curried(rules)).map(update => {
-      val fixed = untilGood(rules, update)
-      fixed(update.length / 2)
-    }).sum
+  override def part2(input: (Set[(Int, Int)], Seq[Seq[Int]])): Int = input match
+    case (rules, updates) => {
+      updates.filterNot(good.curried(rules)).map(update => {
+        val fixed = untilGood(rules, update)
+        fixed(update.length / 2)
+      }).sum
   }
 
   @tailrec

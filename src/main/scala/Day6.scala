@@ -1,5 +1,6 @@
 package aoc2024
 
+import common.Day
 import scala.annotation.tailrec
 import scala.collection.mutable
 import scala.collection.parallel.CollectionConverters.*
@@ -7,9 +8,9 @@ import scala.collection.parallel.CollectionConverters.*
 /**
  * https://adventofcode.com/2024/day/6
  */
-object Day6 {
+object Day6 extends Day[Seq[Seq[Char]], Int](2024, 6) {
 
-  def part1(grid: Seq[Seq[Char]]): Int = {
+  override def part1(grid: Seq[Seq[Char]]): Int = {
     val mutableGrid = mutable.Seq.from(grid.map(mutable.Seq.from))
     part1(mutableGrid)
   }
@@ -56,7 +57,7 @@ object Day6 {
     visited.size
   }
 
-  def part2(grid: Seq[Seq[Char]]): Int = {
+  override def part2(grid: Seq[Seq[Char]]): Int = {
     val points = grid.indices.flatMap(row => grid(row).indices.map(col => (row, col)))
 
     // find start

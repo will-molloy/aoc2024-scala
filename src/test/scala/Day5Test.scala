@@ -1,24 +1,11 @@
 package aoc2024
 
-import org.scalatest.funsuite.AnyFunSuiteLike
+import common.DayTest
 
 import scala.io.Source
 
-class Day5Test extends AnyFunSuiteLike {
-  private val example = true
-
-  test("part1") {
-    val input = readInput((if example then "example_input" else "real_input") + "/day5_input.txt")
-    assert(Day5.part1.tupled(input) === 143)
-  }
-
-  test("part2") {
-    val input = readInput((if example then "example_input" else "real_input") + "/day5_input.txt")
-    assert(Day5.part2.tupled(input) === 123)
-  }
-
-  private def readInput(fileName: String): (Set[(Int, Int)], Seq[Seq[Int]]) = {
-    val input = Source.fromResource(fileName)
+class Day5Test extends DayTest(Day5) {
+  override def convertInput: Source => (Set[(Int, Int)], Seq[Seq[Int]]) = input => {
     val lines = input.getLines().toSeq
 
     val rules = lines.takeWhile(s => s.contains('|'))
@@ -30,4 +17,8 @@ class Day5Test extends AnyFunSuiteLike {
 
     (rules, updates)
   }
+
+  override def part1Expected = Expected(143, 6498)
+
+  override def part2Expected = Expected(123, 5017)
 }

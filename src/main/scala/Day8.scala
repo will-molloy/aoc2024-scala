@@ -1,5 +1,7 @@
 package aoc2024
 
+import common.Day
+
 import scala.collection.mutable
 import scala.util.boundary
 import scala.util.boundary.break
@@ -7,9 +9,9 @@ import scala.util.boundary.break
 /**
  * https://adventofcode.com/2024/day/8
  */
-object Day8 {
+object Day8 extends Day[Seq[Seq[Char]], Long](2024, 8) {
 
-  def part1(grid: Seq[Seq[Char]]): Long = {
+  override def part1(grid: Seq[Seq[Char]]): Long = {
     val nodes = mutable.Set[(Int, Int)]()
     val points = grid.indices.flatMap(row => grid.head.indices.map(col => (row, col)))
     points.foreach((row, col) => points.foreach((row2, col2) => {
@@ -30,7 +32,7 @@ object Day8 {
     nodes.filterNot((row, col) => oob(grid, row, col)).size
   }
 
-  def part2(grid: Seq[Seq[Char]]): Long = {
+  override def part2(grid: Seq[Seq[Char]]): Long = {
     val nodes = mutable.Set[(Int, Int)]()
     val points = grid.indices.flatMap(row => grid.head.indices.map(col => (row, col)))
     points.foreach((row, col) => points.foreach((row2, col2) => {

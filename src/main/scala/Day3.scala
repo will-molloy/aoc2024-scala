@@ -1,11 +1,13 @@
 package aoc2024
 
+import common.Day
+
 /**
  * https://adventofcode.com/2024/day/3
  */
-object Day3 {
+object Day3 extends Day[String, Int](2024, 3) {
 
-  def part1(line: String): Int = {
+  override def part1(line: String): Int = {
     val p = """mul\((\d+),(\d+)\)""".r
     val matches = p.findAllMatchIn(line)
 
@@ -14,7 +16,7 @@ object Day3 {
     }).sum
   }
 
-  def part2(line: String): Int = {
+  override def part2(line: String): Int = {
     val p = """(?:do\(\)|^)(.*?)(?:don't\(\)|$)""".r
     val matches = p.findAllMatchIn(line)
 

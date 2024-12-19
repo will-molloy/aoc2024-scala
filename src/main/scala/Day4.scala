@@ -1,13 +1,15 @@
 package aoc2024
 
+import common.Day
+
 import scala.annotation.tailrec
 
 /**
  * https://adventofcode.com/2024/day/4
  */
-object Day4 {
+object Day4 extends Day[Seq[Seq[Char]], Int](2024, 4) {
 
-  def part1(grid: Seq[Seq[Char]]): Int = {
+  override def part1(grid: Seq[Seq[Char]]): Int = {
     var count = 0;
 
     @tailrec
@@ -44,7 +46,7 @@ object Day4 {
     count
   }
 
-  def part2(grid: Seq[Seq[Char]]): Int = {
+  override def part2(grid: Seq[Seq[Char]]): Int = {
     var count = 0
 
     for (row <- 1 until grid.length - 1) {
