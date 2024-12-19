@@ -6,5 +6,7 @@ import scala.io.Source
 object Inputs {
   def lines(input: Source): Seq[String] = input.getLines().toSeq
 
-  def grid(input: Source): Seq[Seq[Char]] = lines(input).map(_.toCharArray)
+  def charGrid(input: Source): Seq[Seq[Char]] = lines(input).map(_.toCharArray)
+
+  def intGrid(input: Source): Seq[Seq[Int]] = lines(input).map(_.split("\\s+").map(_.toInt))
 }

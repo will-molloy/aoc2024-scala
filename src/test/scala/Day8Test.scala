@@ -5,9 +5,9 @@ import common.{DayTest, Inputs}
 import scala.io.Source
 
 class Day8Test extends DayTest(Day8) {
-  override def convertInput: Source => Seq[Seq[Char]] = Inputs.grid
+  override def input: Source => Seq[Seq[Char]] = Inputs.charGrid
 
-  override def part1Expected = Expected(14, 240)
+  override def part1 = Expected(14, 240)
 
-  override def part2Expected = Expected(34, 955)
+  override def part2 = Expected(34, 955)
 }
