@@ -1,19 +1,19 @@
 package aoc2024
 
-import common.Day
+import common.{Day, Direction, MutableGrid, Point}
 
 import scala.annotation.tailrec
 
 /**
  * https://adventofcode.com/2024/day/4
  */
-object Day4 extends Day[Seq[Seq[Char]], Int](2024, 4) {
+object Day4 extends Day[MutableGrid[Char], Int](2024, 4) {
 
-  override def part1(grid: Seq[Seq[Char]]): Int = {
+  override def part1(grid: MutableGrid[Char]): Int = {
     var count = 0;
 
     @tailrec
-    def dfs(row: Int, col: Int, word: String, dRow: Int, dCol: Int): Unit = {
+    def dfs(point: Point, word: String, dir: Direction): Unit = {
       if (word == "XMAS") {
         count += 1
         return
@@ -23,49 +23,40 @@ object Day4 extends Day[Seq[Seq[Char]], Int](2024, 4) {
         return
       }
 
-      if (row < 0 || row >= grid.length || col < 0 || col >= grid(row).length) {
+      if (!grid.inBounds(point)) {
         return
       }
 
-      dfs(row + dRow, col + dCol, word + grid(row)(col), dRow, dCol)
+      dfs(point.move(dir, 1), word + grid(point), dir)
     }
 
-    for (row <- grid.indices) {
-      for (col <- grid(row).indices) {
-        // search all directions
-        for (dRow <- -1 to 1) {
-          for (dCol <- -1 to 1) {
-            if (!(dRow == 0 && dCol == 0)) {
-              dfs(row, col, "", dRow, dCol)
-            }
-          }
-        }
+    for (point <- grid.points) {
+      // search all directions
+      for (dir <- Direction.allDirs) {
+        dfs(point, "", dir)
       }
     }
 
     count
   }
 
-  override def part2(grid: Seq[Seq[Char]]): Int = {
+  override def part2(grid: MutableGrid[Char]): Int = {
     var count = 0
+    grid.points
+      // X-MAS must be centered on 'A'
+      .filter(p => p.row >= 1 && p.col >= 1 && p.row < grid.height - 1 && p.col < grid.width - 1)
+      .filter(p => grid(p) == 'A')
+      .foreach(p => {
+        val upLeft = grid(p.move(Direction.UP_LEFT, 1))
+        val upRight = grid(p.move(Direction.UP_RIGHT, 1))
+        val downLeft = grid(p.move(Direction.DOWN_LEFT, 1))
+        val downRight = grid(p.move(Direction.DOWN_RIGHT, 1))
 
-    for (row <- 1 until grid.length - 1) {
-      for (col <- 1 until grid(row).length - 1) {
-        // X-MAS must be centered on 'A'
-        if (grid(row)(col) == 'A') {
-          val topLeft = grid(row - 1)(col - 1)
-          val topRight = grid(row - 1)(col + 1)
-          val bottomLeft = grid(row + 1)(col - 1)
-          val bottomRight = grid(row + 1)(col + 1)
-
-          if (Set(topLeft, bottomRight) == Set('M', 'S')
-            && Set(bottomLeft, topRight) == Set('M', 'S')) {
-            count += 1
-          }
+        if (Set(upLeft, downRight) == Set('M', 'S')
+          && Set(downLeft, upRight) == Set('M', 'S')) {
+          count += 1
         }
-      }
-    }
-
+      })
     count
   }
 }

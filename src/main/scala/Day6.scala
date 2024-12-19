@@ -1,6 +1,7 @@
 package aoc2024
 
-import common.Day
+import common.{Day, Direction, MutableGrid, Point}
+
 import scala.annotation.tailrec
 import scala.collection.mutable
 import scala.collection.parallel.CollectionConverters.*
@@ -8,111 +9,98 @@ import scala.collection.parallel.CollectionConverters.*
 /**
  * https://adventofcode.com/2024/day/6
  */
-object Day6 extends Day[Seq[Seq[Char]], Int](2024, 6) {
+object Day6 extends Day[MutableGrid[Char], Int](2024, 6) {
 
-  override def part1(grid: Seq[Seq[Char]]): Int = {
-    val mutableGrid = mutable.Seq.from(grid.map(mutable.Seq.from))
-    part1(mutableGrid)
-  }
-
-  private def part1(grid: mutable.Seq[mutable.Seq[Char]]): Int = {
-    val visited = mutable.Set[(Int, Int)]()
+  override def part1(grid: MutableGrid[Char]): Int = {
+    val visited = mutable.Set[Point]()
 
     @tailrec
-    def dfs(row: Int, col: Int): Unit = {
-      visited.add((row, col))
+    def dfs(point: Point): Unit = {
+      visited.add(point)
 
-      val dir = grid(row)(col)
-      val move = dirMove(dir)
+      val dir = grid(point)
+      val next = point.move(mapDir(dir), 1)
 
-      val nextRow = row + move._1
-      val nextCol = col + move._2
-
-      if (nextRow < 0 || nextRow >= grid.length || nextCol < 0 || nextCol >= grid(row).length) {
+      if (!grid.inBounds(next)) {
         // out
         return
       }
 
-      else if (grid(nextRow)(nextCol) == '.') {
+      else if (grid(next) == '.') {
         // move forward
-        grid(nextRow)(nextCol) = dir
-        grid(row)(col) = '.'
-        dfs(nextRow, nextCol)
+        grid(next) = dir
+        grid(point) = '.'
+        dfs(next)
       }
 
-      else if (grid(nextRow)(nextCol) == '#') {
+      else if (grid(next) == '#') {
         // turn 90deg
-        grid(row)(col) = nextDir(dir)
-        dfs(row, col)
+        grid(point) = nextDir(dir)
+        dfs(point)
       }
     }
 
     // find start
-    val start = grid.indices.flatMap(row => grid(row).indices.map(col => (row, col)))
-      .find((row, col) => Set('>', '<', '^', 'V').contains(grid(row)(col)))
+    val start = grid.points
+      .find(point => Set('>', '<', '^', 'V').contains(grid(point)))
       .get
 
-    dfs.tupled(start)
+    dfs(start)
 
     visited.size
   }
 
-  override def part2(grid: Seq[Seq[Char]]): Int = {
-    val points = grid.indices.flatMap(row => grid(row).indices.map(col => (row, col)))
-
+  override def part2(grid: MutableGrid[Char]): Int = {
     // find start
-    val start = points.find((row, col) => Set('>', '<', '^', 'V').contains(grid(row)(col))).get
+    val start = grid.points
+      .find(point => Set('>', '<', '^', 'V').contains(grid(point)))
+      .get
 
     // try obstacle in all positions
-    points.filter((row, col) => grid(row)(col) == '.')
+    grid.points.filter(point => grid(point) == '.')
       .par
-      .count((row, col) => {
-        val mutableGrid = mutable.Seq.from(grid.map(mutable.Seq.from))
-        mutableGrid(row)(col) = '#'
-        looping(mutableGrid, start)
+      .count(point => {
+        val copy = grid.copy
+        copy(point) = '#'
+        looping(copy, start)
       })
   }
 
-  private def looping(grid: mutable.Seq[mutable.Seq[Char]], start: (Int, Int)): Boolean = {
+  private def looping(grid: MutableGrid[Char], start: Point): Boolean = {
     // TODO how to define looping?
     // 1 - it passes through the starting position? No - it can still leave
     // 2 - it creates a square - 5th turn is in last 4 turns? No - it can loop NOT in a square
     // 3 - ??? how about if turns = grid size. That is at least an upper bound...
-    val gridSize = grid.length * grid.head.length
-
-    val turns = mutable.Set[(Int, Int)]()
+    val turns = mutable.Set[Point]()
     var turnsCount = 0
 
     @tailrec
-    def dfs(row: Int, col: Int): Boolean = {
-      val dir = grid(row)(col)
-      val move = dirMove(dir)
+    def dfs(point: Point): Boolean = {
+      val dir = grid(point)
+      val next = point.move(mapDir(dir), 1)
 
-      val nextRow = row + move._1
-      val nextCol = col + move._2
-
-      if (nextRow < 0 || nextRow >= grid.length || nextCol < 0 || nextCol >= grid(row).length) {
+      if (!grid.inBounds(next)) {
         // out
         false
       }
 
-      else if (grid(nextRow)(nextCol) == '.') {
+      else if (grid(next) == '.') {
         // move forward
-        grid(nextRow)(nextCol) = dir
-        grid(row)(col) = '.'
-        dfs(nextRow, nextCol)
+        grid(next) = dir
+        grid(point) = '.'
+        dfs(next)
       }
 
-      else if (grid(nextRow)(nextCol) == '#') {
-        if (turnsCount == gridSize && turns.contains((row, col))) {
+      else if (grid(next) == '#') {
+        if (turnsCount == grid.size && turns.contains(point)) {
           return true
         }
-        turns.add((row, col))
+        turns.add(point)
         turnsCount += 1
 
         // turn 90deg
-        grid(row)(col) = nextDir(dir)
-        dfs(row, col)
+        grid(point) = nextDir(dir)
+        dfs(point)
       }
 
       else {
@@ -120,14 +108,14 @@ object Day6 extends Day[Seq[Seq[Char]], Int](2024, 6) {
       }
     }
 
-    dfs.tupled(start)
+    dfs(start)
   }
 
-  private def dirMove(dir: Char): (Int, Int) = dir match {
-    case '^' => (-1, 0)
-    case '>' => (0, 1)
-    case 'V' => (1, 0)
-    case '<' => (0, -1)
+  private def mapDir(dir: Char): Direction = dir match {
+    case '^' => Direction.UP
+    case '>' => Direction.RIGHT
+    case 'V' => Direction.DOWN
+    case '<' => Direction.LEFT
   }
 
   private def nextDir(dir: Char): Char = dir match {

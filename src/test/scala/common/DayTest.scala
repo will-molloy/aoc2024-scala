@@ -1,7 +1,7 @@
 package aoc2024
 package common
 
-import org.scalatest.funsuite.{AnyFunSuite, AsyncFunSuite}
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers.shouldBe
 
 import scala.io.Source
