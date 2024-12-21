@@ -12,9 +12,8 @@ object Day9 extends Day[String, Long](2024, 9) {
     checkSum(compact(expand(diskMap)))
   }
 
-  private def expand(diskMap: Array[Int]): Array[String | Int] = {
-    println(diskMap.mkString)
-    val disk = mutable.ArrayBuffer[String | Int]()
+  private def expand(diskMap: Array[Int]): Array[Char | Int] = {
+    val disk = mutable.ArrayBuffer[Char | Int]()
     var id = 0
     var file = true
     for (i <- diskMap) {
@@ -22,19 +21,19 @@ object Day9 extends Day[String, Long](2024, 9) {
         disk.appendAll(Array.fill(i)(id))
         id += 1
       } else {
-        disk.appendAll(Array.fill(i)("."))
+        disk.appendAll(Array.fill(i)('.'))
       }
       file = !file
     }
     disk.toArray
   }
 
-  private def compact(disk: Array[String | Int]): Array[String | Int] = {
-    println(disk.mkString)
+  private def compact(disk: Array[Char | Int]): Array[Char | Int] = {
     var start = 0
     var end = disk.length - 1
     while (start <= end) {
-      if (disk(start) == ".") {
+      // need to check as 'Char' otherwise it treats 46 as '.'
+      if (disk(start).isInstanceOf[Char] && disk(start) == '.') {
         val temp = disk(end)
         disk(end) = disk(start)
         disk(start) = temp
@@ -46,8 +45,7 @@ object Day9 extends Day[String, Long](2024, 9) {
     disk
   }
 
-  private def checkSum(disk: Array[String | Int]): Long = {
-    println(disk.mkString)
+  private def checkSum(disk: Array[Char | Int]): Long = {
     disk.takeWhile(_.isInstanceOf[Int])
       .zipWithIndex
       .foldLeft(0L) { case (sum, (id, i)) => sum + id.asInstanceOf[Int].toLong * i }
