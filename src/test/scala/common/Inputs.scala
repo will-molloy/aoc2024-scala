@@ -9,7 +9,10 @@ object Inputs {
   // join string WITHOUT newlines...!
   def string(input: Source): String = lines(input).mkString("")
 
-  def intLines(input: Source): Seq[Seq[Int]] = lines(input).map(_.split("\\s+").map(_.toInt))
+  def nums(input: Source): Seq[Long] = string(input).split("\\s+").map(_.toLong)
+
+  // TODO prob want to use Long over Int everywhere
+  def numLines(input: Source): Seq[Seq[Int]] = lines(input).map(_.split("\\s+").map(_.toInt))
 
   def charGrid(input: Source): Grid[Char] = Grid(lines(input).toArray.map(_.toCharArray))
 }

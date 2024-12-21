@@ -5,7 +5,7 @@ import common.{DayTest, Inputs}
 import scala.io.Source
 
 class Day2Test extends DayTest(Day2) {
-  override def input: Source => Seq[Seq[Int]] = Inputs.intLines
+  override def input: Source => Seq[Seq[Int]] = Inputs.numLines
 
   override def part1 = Expected(2, 606)
 
