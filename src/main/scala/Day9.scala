@@ -3,7 +3,6 @@ package aoc2024
 import common.Day
 
 import scala.collection.mutable
-import scala.language.postfixOps
 
 object Day9 extends Day[String, Long](2024, 9) {
 

@@ -1,26 +1,22 @@
 package aoc2024
 package common
 
-import scala.collection.mutable
-
-class MutableGrid[T](grid: Seq[Seq[T]]) {
-  private val mutableGrid = mutable.Seq.from(grid.map(mutable.Seq.from))
+class MutableGrid[T](grid: Array[Array[T]]) {
+  @throws[IndexOutOfBoundsException]
+  def apply(point: Point): T = grid(point.row)(point.col)
 
   @throws[IndexOutOfBoundsException]
-  def apply(point: Point): T = mutableGrid(point.row)(point.col)
+  def update(point: Point, t: T): Unit = grid(point.row)(point.col) = t
 
-  @throws[IndexOutOfBoundsException]
-  def update(point: Point, t: T): Unit = mutableGrid(point.row)(point.col) = t
+  def inBounds(point: Point): Boolean = grid.indices.contains(point.row) && grid.head.indices.contains(point.col)
 
-  def inBounds(point: Point): Boolean = mutableGrid.indices.contains(point.row) && mutableGrid.head.indices.contains(point.col)
+  def points: Seq[Point] = grid.indices.flatMap(row => grid.head.indices.map(col => Point(row, col)))
 
-  def points: Seq[Point] = mutableGrid.indices.flatMap(row => mutableGrid.head.indices.map(col => Point(row, col)))
+  def height: Int = grid.length
 
-  def height: Int = mutableGrid.length
-
-  def width: Int = mutableGrid.head.length
+  def width: Int = grid.head.length
 
   def size: Int = height * width
 
-  def copy: MutableGrid[T] = MutableGrid(mutableGrid.map(_.toSeq).toSeq)
+  def copy: MutableGrid[T] = MutableGrid[T](grid.transpose.transpose)
 }
