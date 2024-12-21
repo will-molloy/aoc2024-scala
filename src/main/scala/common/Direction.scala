@@ -7,5 +7,7 @@ enum Direction {
 }
 
 object Direction {
-  def allDirs: Seq[Direction] = Direction.values
+  def straight: Seq[Direction] = Seq(UP, DOWN, LEFT, RIGHT)
+
+  def straightAndDiagonal: Seq[Direction] = Direction.values
 }

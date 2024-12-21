@@ -1,7 +1,7 @@
 package aoc2024
 package common
 
-class MutableGrid[T](grid: Array[Array[T]]) {
+class Grid[T](grid: Array[Array[T]]) {
   @throws[IndexOutOfBoundsException]
   def apply(point: Point): T = grid(point.row)(point.col)
 
@@ -18,5 +18,5 @@ class MutableGrid[T](grid: Array[Array[T]]) {
 
   def size: Int = height * width
 
-  def copy: MutableGrid[T] = MutableGrid[T](grid.transpose.transpose)
+  def copy: Grid[T] = Grid[T](grid.transpose.transpose)
 }

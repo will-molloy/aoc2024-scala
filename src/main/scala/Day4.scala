@@ -1,15 +1,15 @@
 package aoc2024
 
-import common.{Day, Direction, MutableGrid, Point}
+import common.{Day, Direction, Grid, Point}
 
 import scala.annotation.tailrec
 
 /**
  * https://adventofcode.com/2024/day/4
  */
-object Day4 extends Day[MutableGrid[Char], Int](2024, 4) {
+object Day4 extends Day[Grid[Char], Int](2024, 4) {
 
-  override def part1(grid: MutableGrid[Char]): Int = {
+  override def part1(grid: Grid[Char]): Int = {
     var count = 0;
 
     @tailrec
@@ -32,7 +32,7 @@ object Day4 extends Day[MutableGrid[Char], Int](2024, 4) {
 
     for (point <- grid.points) {
       // search all directions
-      for (dir <- Direction.allDirs) {
+      for (dir <- Direction.straightAndDiagonal) {
         dfs(point, "", dir)
       }
     }
@@ -40,7 +40,7 @@ object Day4 extends Day[MutableGrid[Char], Int](2024, 4) {
     count
   }
 
-  override def part2(grid: MutableGrid[Char]): Int = {
+  override def part2(grid: Grid[Char]): Int = {
     var count = 0
     grid.points
       // X-MAS must be centered on 'A'

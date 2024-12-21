@@ -9,9 +9,9 @@ import scala.util.boundary.break
 /**
  * https://adventofcode.com/2024/day/8
  */
-object Day8 extends Day[MutableGrid[Char], Long](2024, 8) {
+object Day8 extends Day[Grid[Char], Long](2024, 8) {
 
-  override def part1(grid: MutableGrid[Char]): Long = {
+  override def part1(grid: Grid[Char]): Long = {
     val nodes = mutable.Set[Point]()
     grid.points.foreach(point => grid.points.foreach(point2 => {
       // 2 antenna
@@ -31,7 +31,7 @@ object Day8 extends Day[MutableGrid[Char], Long](2024, 8) {
     nodes.count(grid.inBounds)
   }
 
-  override def part2(grid: MutableGrid[Char]): Long = {
+  override def part2(grid: Grid[Char]): Long = {
     val nodes = mutable.Set[Point]()
     grid.points.foreach(point => grid.points.foreach(point2 => {
       // 2 antenna

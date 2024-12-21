@@ -6,7 +6,10 @@ import scala.io.Source
 object Inputs {
   def lines(input: Source): Seq[String] = input.getLines().toSeq
 
-  def charGrid(input: Source): MutableGrid[Char] = MutableGrid(lines(input).toArray.map(_.toCharArray))
+  // join string WITHOUT newlines...!
+  def string(input: Source): String = lines(input).mkString("")
 
-  def intGrid(input: Source): Seq[Seq[Int]] = lines(input).map(_.split("\\s+").map(_.toInt))
+  def intLines(input: Source): Seq[Seq[Int]] = lines(input).map(_.split("\\s+").map(_.toInt))
+
+  def charGrid(input: Source): Grid[Char] = Grid(lines(input).toArray.map(_.toCharArray))
 }

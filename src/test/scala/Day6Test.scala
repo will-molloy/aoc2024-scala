@@ -1,11 +1,11 @@
 package aoc2024
 
-import common.{DayTest, MutableGrid, Inputs}
+import common.{DayTest, Grid, Inputs}
 
 import scala.io.Source
 
 class Day6Test extends DayTest(Day6) {
-  override def input: Source => MutableGrid[Char] = Inputs.charGrid
+  override def input: Source => Grid[Char] = Inputs.charGrid
 
   override def part1 = Expected(41, 5409)
 

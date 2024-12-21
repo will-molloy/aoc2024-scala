@@ -5,8 +5,7 @@ import common.{DayTest, Inputs}
 import scala.io.Source
 
 class Day3Test extends DayTest(Day3) {
-  // join string WITHOUT newlines...!
-  override def input: Source => String = Inputs.lines.andThen(_.mkString(""))
+  override def input: Source => String = Inputs.string
 
   override def part1 = Expected(161, 196826776)
 

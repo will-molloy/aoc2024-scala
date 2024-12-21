@@ -1,6 +1,6 @@
 package aoc2024
 
-import common.{Day, Direction, MutableGrid, Point}
+import common.{Day, Direction, Grid, Point}
 
 import scala.annotation.tailrec
 import scala.collection.mutable
@@ -9,9 +9,9 @@ import scala.collection.parallel.CollectionConverters.*
 /**
  * https://adventofcode.com/2024/day/6
  */
-object Day6 extends Day[MutableGrid[Char], Int](2024, 6) {
+object Day6 extends Day[Grid[Char], Int](2024, 6) {
 
-  override def part1(grid: MutableGrid[Char]): Int = {
+  override def part1(grid: Grid[Char]): Int = {
     val visited = mutable.Set[Point]()
 
     @tailrec
@@ -50,7 +50,7 @@ object Day6 extends Day[MutableGrid[Char], Int](2024, 6) {
     visited.size
   }
 
-  override def part2(grid: MutableGrid[Char]): Int = {
+  override def part2(grid: Grid[Char]): Int = {
     // find start
     val start = grid.points
       .find(point => Set('>', '<', '^', 'V').contains(grid(point)))
@@ -66,7 +66,7 @@ object Day6 extends Day[MutableGrid[Char], Int](2024, 6) {
       })
   }
 
-  private def looping(grid: MutableGrid[Char], start: Point): Boolean = {
+  private def looping(grid: Grid[Char], start: Point): Boolean = {
     // TODO how to define looping?
     // 1 - it passes through the starting position? No - it can still leave
     // 2 - it creates a square - 5th turn is in last 4 turns? No - it can loop NOT in a square
