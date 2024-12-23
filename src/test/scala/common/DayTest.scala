@@ -37,6 +37,7 @@ trait DayTest[TInput, TOutput, TDay <: Day[TInput, TOutput]](day: TDay) extends 
     input(Source.fromResource(fileName))
   }
 
+  // TODO move this to main code, keeps all logic in 1 place
   def input: Source => TInput
 
   def part1: Expected
