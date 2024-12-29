@@ -1,18 +1,18 @@
 package aoc2024
 
-import common.Day
+import common.{Day, Input}
 
 /**
  * https://adventofcode.com/2024/day/7
  */
-object Day7 extends Day[Seq[String], Long](2024, 7) {
+object Day7 extends Day(2024, 7) {
 
-  override def part1(lines: Seq[String]): Long = {
-    lines.map(result(_, Seq('+', '*'))).sum
+  override def part1(input: Input): Long = {
+    input.lines().map(result(_, Seq('+', '*'))).sum
   }
 
-  override def part2(lines: Seq[String]): Long = {
-    lines.map(result(_, Seq('+', '*', '|'))).sum
+  override def part2(input: Input): Long = {
+    input.lines().map(result(_, Seq('+', '*', '|'))).sum
   }
 
   private def result(line: String, ops: Seq[Char]): Long = {

@@ -1,6 +1,6 @@
 package aoc2024
 
-import common.{Day, Direction, Grid, Point}
+import common.{Day, Direction, Grid, Input, Point}
 
 import scala.annotation.tailrec
 import scala.collection.mutable
@@ -9,9 +9,10 @@ import scala.collection.parallel.CollectionConverters.*
 /**
  * https://adventofcode.com/2024/day/6
  */
-object Day6 extends Day[Grid[Char], Int](2024, 6) {
+object Day6 extends Day(2024, 6) {
 
-  override def part1(grid: Grid[Char]): Int = {
+  override def part1(input: Input): Int = {
+    val grid = input.charGrid()
     val visited = mutable.Set[Point]()
 
     @tailrec
@@ -50,7 +51,9 @@ object Day6 extends Day[Grid[Char], Int](2024, 6) {
     visited.size
   }
 
-  override def part2(grid: Grid[Char]): Int = {
+  override def part2(input: Input): Int = {
+    val grid = input.charGrid()
+    
     // find start
     val start = grid.points
       .find(point => Set('>', '<', '^', 'V').contains(grid(point)))

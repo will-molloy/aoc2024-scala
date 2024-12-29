@@ -20,8 +20,6 @@ jobs:
 
       - name: Run tests
         run: sbt test
-        env:
-          CI: true
 
   release:
     needs: build

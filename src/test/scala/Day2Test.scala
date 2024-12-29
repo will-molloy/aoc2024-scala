@@ -1,11 +1,8 @@
 package aoc2024
 
-import common.{DayTest, Inputs}
-
-import scala.io.Source
+import common.DayTest
 
 class Day2Test extends DayTest(Day2) {
-  override def input: Source => Seq[Seq[Int]] = Inputs.numLines
 
   override def part1 = Expected(2, 606)
 

@@ -1,13 +1,8 @@
 package aoc2024
 
-import common.{DayTest, Inputs}
-
-import org.scalatest.funsuite.AnyFunSuite
-
-import scala.io.Source
+import common.DayTest
 
 class Day11Test extends DayTest(Day11) {
-  override def input: Source => Seq[Long] = Inputs.nums
 
   override def part1 = Expected(55312, 239714)
 

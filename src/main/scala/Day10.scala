@@ -1,15 +1,16 @@
 package aoc2024
 
-import common.{Day, Direction, Grid, Point}
+import common.{Day, Direction, Grid, Input, Point}
 
 import scala.collection.mutable
 
 /**
  * https://adventofcode.com/2024/day/10
  */
-object Day10 extends Day[Grid[Char], Long](2024, 10) {
+object Day10 extends Day(2024, 10) {
 
-  override def part1(grid: Grid[Char]): Long = {
+  override def part1(input: Input): Long = {
+    val grid = input.charGrid()
     grid.points.filter(grid(_) == '0').map(score(grid, _)).sum
   }
 
@@ -34,7 +35,8 @@ object Day10 extends Day[Grid[Char], Long](2024, 10) {
     reach.size
   }
 
-  override def part2(grid: Grid[Char]): Long = {
+  override def part2(input: Input): Long = {
+    val grid = input.charGrid()
     grid.points.filter(grid(_) == '0').map(rating(grid, _)).sum
   }
 

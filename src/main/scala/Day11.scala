@@ -1,21 +1,21 @@
 package aoc2024
 
-import common.Day
+import common.{Day, Input}
 
 import scala.collection.mutable
 
 /**
  * https://adventofcode.com/2024/day/11
  */
-object Day11 extends Day[Seq[Long], Long](2024, 11) {
+object Day11 extends Day(2024, 11) {
   private val dp = mutable.HashMap[(Long, Int), Long]()
 
-  override def part1(input: Seq[Long]): Long = {
-    input.map(amount(_, 25)).sum
+  override def part1(input: Input): Long = {
+    input.nums().map(amount(_, 25)).sum
   }
 
-  override def part2(input: Seq[Long]): Long = {
-    input.map(amount(_, 75)).sum
+  override def part2(input: Input): Long = {
+    input.nums().map(amount(_, 75)).sum
   }
 
   private def amount(stone: Long, blinks: Int): Long = {

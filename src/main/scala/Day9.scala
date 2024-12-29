@@ -1,16 +1,16 @@
 package aoc2024
 
-import common.Day
+import common.{Day, Input}
 
 import scala.collection.mutable
 
 /**
  * https://adventofcode.com/2024/day/9
  */
-object Day9 extends Day[String, Long](2024, 9) {
+object Day9 extends Day(2024, 9) {
 
-  override def part1(input: String): Long = {
-    val diskMap = input.split("").map(_.toInt)
+  override def part1(input: Input): Long = {
+    val diskMap = input.string().split("").map(_.toInt)
     checkSum(compact(expand(diskMap)))
   }
 
@@ -53,8 +53,8 @@ object Day9 extends Day[String, Long](2024, 9) {
       .foldLeft(0L) { case (sum, (block, i)) => sum + block.fileId * i }
   }
 
-  override def part2(input: String): Long = {
-    val diskMap = input.split("").map(_.toInt)
+  override def part2(input: Input): Long = {
+    val diskMap = input.string().split("").map(_.toInt)
     checkSum2(compact2(expand2(diskMap)))
   }
 

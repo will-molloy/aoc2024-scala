@@ -1,15 +1,16 @@
 package aoc2024
 
-import common.{Day, Direction, Grid, Point}
+import common.{Day, Direction, Grid, Input, Point}
 
 import scala.collection.mutable
 
 /**
  * https://adventofcode.com/2024/day/12
  */
-object Day12 extends Day[Grid[Char], Long](2024, 12) {
+object Day12 extends Day(2024, 12) {
 
-  override def part1(grid: Grid[Char]): Long = {
+  override def part1(input: Input): Long = {
+    val grid = input.charGrid()
     regions(grid)
       // TODO why is toSeq needed? Because return of map goes into Set otherwise?
       .toSeq
@@ -20,7 +21,7 @@ object Day12 extends Day[Grid[Char], Long](2024, 12) {
       }).sum
   }
 
-  override def part2(input: Grid[Char]): Long = ???
+  override def part2(input: Input): Long = ???
 
   // TODO this can be a method on Grid.
   private def regions(grid: Grid[Char]): Set[Set[Point]] = {
