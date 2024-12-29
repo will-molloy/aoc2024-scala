@@ -1,6 +1,7 @@
 package aoc2024
 
-import common.{Day, Direction, Grid, Input, Point}
+import common.*
+import common.grid.*
 
 import scala.collection.mutable
 

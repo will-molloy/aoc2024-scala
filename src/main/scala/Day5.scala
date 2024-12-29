@@ -1,6 +1,6 @@
 package aoc2024
 
-import common.{Day, Input}
+import common.*
 
 import scala.annotation.tailrec
 

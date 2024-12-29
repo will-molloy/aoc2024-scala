@@ -1,6 +1,7 @@
 package aoc2024
 
-import common._
+import common.*
+import common.grid.*
 
 import scala.collection.mutable
 import scala.util.boundary

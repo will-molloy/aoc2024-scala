@@ -1,6 +1,7 @@
 package aoc2024
 
-import common.{Day, Direction, Grid, Input, Point}
+import common.*
+import common.grid.*
 
 import scala.collection.mutable
 
@@ -21,7 +22,7 @@ object Day12 extends Day(2024, 12) {
       }).sum
   }
 
-  override def part2(input: Input): Long = ???
+  override def part2(input: Input): Long = 0
 
   // TODO this can be a method on Grid.
   private def regions(grid: Grid[Char]): Set[Set[Point]] = {

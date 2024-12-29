@@ -1,5 +1,5 @@
 package aoc2024
-package common
+package common.grid
 
 enum Direction {
   case UP, DOWN, LEFT, RIGHT,

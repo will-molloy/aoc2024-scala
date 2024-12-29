@@ -1,6 +1,7 @@
 package aoc2024
 
-import common.{Day, Input}
+import common.*
+import common.grid.*
 
 import scala.annotation.tailrec
 

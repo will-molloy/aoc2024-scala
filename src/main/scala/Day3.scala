@@ -1,6 +1,6 @@
 package aoc2024
 
-import common.{Day, Input}
+import common.*
 
 /**
  * https://adventofcode.com/2024/day/3

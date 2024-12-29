@@ -1,12 +1,9 @@
 package aoc2024
-package common
+package common.grid
 
 class Grid[T](grid: Array[Array[T]]) {
   @throws[IndexOutOfBoundsException]
   def apply(point: Point): T = grid(point.row)(point.col)
-
-  @throws[IndexOutOfBoundsException]
-  def update(point: Point, t: T): Unit = grid(point.row)(point.col) = t
 
   def inBounds(point: Point): Boolean = grid.indices.contains(point.row) && grid.head.indices.contains(point.col)
 
@@ -18,5 +15,6 @@ class Grid[T](grid: Array[Array[T]]) {
 
   def size: Int = height * width
 
-  def copy: Grid[T] = Grid[T](grid.transpose.transpose)
+  // TODO why doesn't map(_.clone()) work?
+  def toMutable: MutableGrid[T] = MutableGrid[T](grid.transpose.transpose)
 }

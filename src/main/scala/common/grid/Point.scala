@@ -1,10 +1,10 @@
 package aoc2024
-package common
+package common.grid
 
 case class Point(row: Int, col: Int) {
 
   def move(dRow: Int, dCol: Int): Point = Point(row + dRow, col + dCol)
-  
+
   def move(direction: Direction, d: Int): Point = direction match
     case Direction.UP => move(-d, 0)
     case Direction.DOWN => move(d, 0)

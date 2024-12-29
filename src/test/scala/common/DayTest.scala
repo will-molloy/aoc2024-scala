@@ -6,7 +6,7 @@ import org.scalatest.matchers.should.Matchers.shouldBe
 
 trait DayTest(day: Day) extends AnyFunSuite {
   private val ci = sys.env.contains("CI")
-  
+
   test("part1 - example") {
     day.part1(Input.example(day)).shouldBe(part1.example)
   }
