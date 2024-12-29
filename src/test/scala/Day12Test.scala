@@ -9,7 +9,7 @@ import scala.io.Source
 class Day12Test extends DayTest(Day12) {
   override def input: Source => Grid[Char] = Inputs.charGrid
 
-  override def part1 = Expected(1930, 0)
+  override def part1 = Expected(1930, 1485656)
 
-  override def part2 = Expected(0, 0)
+  override def part2 = Expected(1206, 0)
 }

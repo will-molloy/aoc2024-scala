@@ -11,33 +11,18 @@ object Day12 extends Day[Grid[Char], Long](2024, 12) {
 
   override def part1(grid: Grid[Char]): Long = {
     regions(grid)
-      .toSeq.sortBy(region => grid(region.head))
+      // TODO why is toSeq needed? Because return of map goes into Set otherwise?
+      .toSeq
       .map(region => {
         val a = region.size
         val p = perimeter(region)
-        println(s"${grid(region.head)} = $a * $p")
         a * p
       }).sum
   }
 
   override def part2(input: Grid[Char]): Long = ???
 
-  private def perimeter(region: Set[Point]): Long = {
-    // idea: perimeter = area * 4 - inner_edges
-    val area = region.size
-    val edges = mutable.Set[(Point, Point)]()
-
-    for (point <- region) {
-      for (dir <- Direction.straight) {
-        val next = point.move(dir, 1)
-        if (region(next)) {
-          edges.add((point, next))
-        }
-      }
-    }
-    area * 4 - edges.size
-  }
-
+  // TODO this can be a method on Grid.
   private def regions(grid: Grid[Char]): Set[Set[Point]] = {
     val visited = mutable.Set[Point]()
 
@@ -62,5 +47,30 @@ object Day12 extends Day[Grid[Char], Long](2024, 12) {
       }
     }
     regions.toSet
+  }
+
+  private def perimeter(region: Set[Point]): Long = {
+    // perimeter = area * 4 - inner_edges
+    val area = region.size
+    val edges = mutable.Set[(Point, Point)]()
+
+    for (point <- region) {
+      for (dir <- Direction.straight) {
+        val next = point.move(dir, 1)
+        if (region(next)) {
+          edges.add((point, next))
+        }
+      }
+    }
+    area * 4 - edges.size
+  }
+
+  private def sides(region: Set[Point]): Long = {
+    // count turns by traversing perimeter until back at start (facing same direction).
+    // ^ hard part is being greedy... it needs to take minimal turn to keep going, not always clockwise.
+    // sides = turns / 90deg ??
+    // how to traverse perimeter ??? lol
+
+    0
   }
 }
